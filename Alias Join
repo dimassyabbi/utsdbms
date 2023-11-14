@@ -49,3 +49,56 @@ FROM nasabah
 RIGHT JOIN transaksi
 ON transaksi.no_rekening=nasabah.no_rekening;
 
+
+//Memecah dan menggabungkan string
+
+SELECT nama_nasabah, left(nama_nasabah,2), mid(nama_nasabah,3,1),
+right(nama_nasabah,2) FROM Nasabah
+
+1.Fungsi substring() mengambil karakter dari posisi awal, dari posisi sebelah kanan
+
+SELECT nama_nasabah, substring(nama_nasabah,4), mid(nama_nasabah,3) FROM
+Nasabah
+
+2.Fungsi concat() digunakan untuk menggabungkan
+SELECT concat('helo ',nama) FROM pasien
+
+3.Jika ingin nama dengan berakhiran “a” dengan menggunakan kondisi Ya dan Tidak
+SELECT concat(nama_nasabah,' berakhiran "a" : ',
+if(right(nama_nasabah,1)='a','ya','tidak')) from nasabah
+
+//Pencarian atau pencocokan karakter
+
+1.Untuk dapat melihat karakter yang diawal dengan “ma”
+SELECT nama_nasabah FROM nasabah where nama_nasabah regexp ‘^ba’
+
+2.Untuk dapat melihat karakter nama yang diakhiri dengan “ya”
+SELECT nama_nasabah FROM nasabah WHERE nama_nasabah regexp 'ya$'
+
+//menampilkan tanggal dan waktu
+
+SELECT tanggal, date_format(tanggal,'%c/%e/%y %r') as format_1,
+date_format(tanggal,'%e-%M-%Y %H') as format_2 FROM transaksi
+
+//Fungsi Ekstraksi dari tanggal dan waktu
+
+SELECT tanggal, Year(tanggal) as Tahun,
+Monthname(tanggal) as Bulan, dayofmonth(tanggal) as Tanggal,
+dayname(tanggal) as Hari, hour(tanggal) as Jam FROM transaksi
+
+Fungsi ekstraksi dapat diterapkan juga pada curdate()
+SELECT curdate(), year(curdate()) as Tahun, month(curdate()) as Bulan,
+dayofmonth(curdate()) as Tanggal;
+
+//Menambahkan interval tanggal
+
+Tanggal sekarang ditambah dengan 3 hari
+SELECT curdate(), date_add(curdate(),interval 3 day);
+
+Tanggal sekarang dikurangi dengan 3 hari
+SELECT curdate(), date_sub(curdate(),interval 3 day);
+
+// Menghitung usia
+
+SELECT tanggal_lahir,year(curdate())- year(tanggal_lahir) as Usia FROM
+Nasabah
