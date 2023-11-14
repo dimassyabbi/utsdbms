@@ -1,0 +1,51 @@
+//ALIAS
+
+1. Menggunakan Alias Pada Tabel
+
+Contoh #1 :
+select tr.no_trans, tr.no_rekening, tr.nominal from transaksi tr
+
+Contoh #2:
+select tr.no_trans, tr.no_rekening, ns.nama_nasabah, tr.nominal
+from transaksi tr, nasabah ns
+where tr.no_rekening=ns.no_rekening
+
+2. Menggunakan Alias Pada Kolom
+
+Contoh #1:
+select no_trans as "Nomor Transaksi", tanggal as "Tanggal
+Transaksi", No_rekening as "Nomor Rekening" from transaksi;
+
+//JOIN TABEL
+
+1. Inner Join
+
+Cara #1. Inner Join dengan WHERE.
+
+Contoh 1 . join dengan 2 tabel
+SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening, nasabah.nama_nasabah
+FROM transaksi, nasabah
+WHERE transaksi.no_rekening=nasabah.no_rekening;
+
+Contoh 2 join dengan 3 tabel
+SELECT transaksi.no_trans, transaksi.tanggal, nasabah.no_rekening, nasabah.nama_nasabah, jenis_transaksi.kode_jenis, jenis_transaksi.jenis_transaksi
+FROM transaksi, nasabah, jenis_transaksi
+WHERE transaksi.no_rekening=nasabah.no_rekening
+AND transaksi.kode_jenis=jenis_transaksi.kode_jenis;
+
+2. Outer Join
+
+#LEFT JOIN
+
+SELECT nasabah.no_rekening, nasabah.nama_nasabah,transaksi.no_trans, transaksi.tanggal
+FROM nasabah
+LEFT JOIN transaksi
+ON transaksi.no_rekening=nasabah.no_rekening;
+
+#RIGHT JOIN
+
+SELECT nasabah.no_rekening, nasabah.nama_nasabah,transaksi.no_trans,transaksi.tanggal
+FROM nasabah
+RIGHT JOIN transaksi
+ON transaksi.no_rekening=nasabah.no_rekening;
+
