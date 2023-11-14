@@ -1,0 +1,41 @@
+//membuat table view
+create view view1
+as 
+select nama_nasabah,alamat,tanggallahir
+from nasabah
+
+//mengubah nama table view
+rename table view1 to view_nasabah
+
+//menghapus view 
+drop view view_nasabah
+
+//Membuat view view_transxxxx. Dan yang akan ditampilkan adalah: No_Trans, Kode_Jenis,No_Rekening, Nominal
+create view view_trans
+as
+select no_trans,kode_jenis,no_rekening,nominal
+from transaksi
+
+//Mengubah struktur view
+alter view view_Trans as 
+select no_trans as no_transaksi,kode_jenis,no_rekening,nominal
+from transaksi
+
+//mengisi tabel asal dari view
+insert view_trans VALUES ('127','2','001-01-0113','1000000')
+
+//mengganti isi tabel asal dari view
+update view_Trans
+set Nominal = 1200000
+where no_Transaksi = '124'
+
+//menghapus isi tabel asal dari view
+delete from view_trans
+where no_transaksi = '127'
+
+//membuat view dari 2 tabel
+create view view_join1
+as
+select tr.no_trans,tr.tanggal,ns.no_rekening,ns.nama_nasabah,tr.nominal
+from transaksi tr,nasabah ns 
+where tr.no_rekening=ns.no_rekening
